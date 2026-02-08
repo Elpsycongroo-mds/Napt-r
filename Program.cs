@@ -97,6 +97,17 @@ namespace Naptár
                 Console.ReadKey();
             }
 
+            static void UjEsemenyRogzitese()
+            {
+                Console.WriteLine("\n--- ÚJ ESEMÉNY ---");
+                Esemeny uj = new Esemeny();
+
+                Console.Write("Kié az esemény (Apa/Anya)? ");
+                uj.Tulajdonos = Console.ReadLine();
+            }
+
+
+
 
 
 
