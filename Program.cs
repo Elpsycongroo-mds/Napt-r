@@ -141,7 +141,23 @@ namespace Naptár
                     }
                 } while (!sikeresOra);
 
+                int perc = 0;
+                bool sikeresPerc = false;
+                do
+                {
+                    Console.Write("Perc (0-59): ");
+                    string bemenet = Console.ReadLine();
+                    bool sikerult = int.TryParse(bemenet, out perc);
 
+                    if (sikerult && perc >= 0 && perc < 60)
+                    {
+                        sikeresPerc = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Hiba! 0 és 59 közötti számot adj meg.");
+                    }
+                } while (!sikeresPerc);
 
 
             }
