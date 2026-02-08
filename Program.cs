@@ -188,6 +188,40 @@ namespace Naptár
 
             }
 
+            static void LegkozelebbiEsemeny()
+            {
+                int vNap = veletlen.Next(1, 30);
+                int vOra = veletlen.Next(8, 20);
+                DateTime most = new DateTime(2028, 2, vNap, vOra, 0, 0);
+
+                Console.WriteLine("\nGenerált viszonyítási időpont: " + most.ToString());
+
+                Esemeny legkozelebbi = null;
+
+                foreach (Esemeny e in esemenyLista)
+                {
+                    // Ha az esemény a jövőben van (nagyobb mint a most)
+                    if (e.Idopont > most)
+                    {
+                        // Ha még nincs találatunk VAGY ez az esemény korábbi mint az eddigi legjobb
+                        if (legkozelebbi == null || e.Idopont < legkozelebbi.Idopont)
+                        {
+                            legkozelebbi = e;
+                        }
+                    }
+                }
+
+                if (legkozelebbi != null)
+                {
+                    Console.WriteLine("A legközelebbi esemény: {0} - {1}",
+                        legkozelebbi.Tulajdonos, legkozelebbi.Idopont);
+                }
+                else
+                {
+                    Console.WriteLine("Nincs későbbi esemény ebben a hónapban.");
+                }
+            }
+
 
 
 
