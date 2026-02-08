@@ -159,6 +159,32 @@ namespace Naptár
                     }
                 } while (!sikeresPerc);
 
+                uj.Idopont = new DateTime(2028, 2, nap, ora, perc, 0);
+
+                // időtartama
+                int idotartam = 0;
+                bool sikeresIdo = false;
+                do
+                {
+                    Console.Write("Időtartam (perc): ");
+                    string bemenet = Console.ReadLine();
+                    bool sikerult = int.TryParse(bemenet, out idotartam);
+
+                    if (sikerult && idotartam > 0)
+                    {
+                        sikeresIdo = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Hiba! Pozitív számot adj meg.");
+                    }
+                } while (!sikeresIdo);
+
+                uj.Idotartam = idotartam;
+                uj.MenteniKell = true;
+
+                esemenyLista.Add(uj);
+                Console.WriteLine("Rögzítve! Ez az esemény kilépéskor el lesz mentve.");
 
             }
 
