@@ -123,6 +123,24 @@ namespace Naptár
                     }
                 } while (!sikeresNap);
 
+                int ora = 0;
+                bool sikeresOra = false;
+                do
+                {
+                    Console.Write("Óra (8-20): ");
+                    string bemenet = Console.ReadLine();
+                    bool sikerult = int.TryParse(bemenet, out ora);
+
+                    if (sikerult && ora >= 8 && ora <= 20)
+                    {
+                        sikeresOra = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Hiba! 8 és 20 közötti számot adj meg.");
+                    }
+                } while (!sikeresOra);
+
 
 
 
