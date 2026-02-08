@@ -200,10 +200,10 @@ namespace Naptár
 
                 foreach (Esemeny e in esemenyLista)
                 {
-                    // Ha az esemény a jövőben van (nagyobb mint a most)
+                    // Ha az esemény a jövőben van
                     if (e.Idopont > most)
                     {
-                        // Ha még nincs találatunk VAGY ez az esemény korábbi mint az eddigi legjobb
+                        // Ha még nincs találatunk VAGY ez az esemény korábbi
                         if (legkozelebbi == null || e.Idopont < legkozelebbi.Idopont)
                         {
                             legkozelebbi = e;
