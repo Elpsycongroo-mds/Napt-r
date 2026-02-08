@@ -222,7 +222,29 @@ namespace Naptár
                 }
             }
 
-
+            static void FajlbolBetoltes()
+            {
+                if (File.Exists(fajlNev))
+                {
+                    string[] sorok = File.ReadAllLines(fajlNev);
+                    foreach (string sor in sorok)
+                    {
+                        try
+                        {
+                            string[] adatok = sor.Split(';');
+                            Esemeny betoltott = new Esemeny();
+                            betoltott.Tulajdonos = adatok[0];
+                            betoltott.Idopont = DateTime.Parse(adatok[1]);
+                            betoltott.Idotartam = Convert.ToInt32(adatok[2]);
+                            betoltott.MenteniKell = true;
+                            esemenyLista.Add(betoltott);
+                        }
+                        catch
+                        {
+                        }
+                    }
+                }
+            }
 
 
 
