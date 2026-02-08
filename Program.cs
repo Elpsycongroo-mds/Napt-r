@@ -80,7 +80,7 @@ namespace Naptár
 
         static void NaptarMegjelenites()
         {
-            Console.WriteLine("\n--- ESEMÉNYEK LISTÁJA ---");
+            Console.WriteLine("\n--- Események ---");
             Console.WriteLine("(Jelmagyarázat: [M] = Mentett/Saját, [G] = Generált/Ideiglenes)\n");
 
             foreach (Esemeny e in esemenyLista)
@@ -95,7 +95,7 @@ namespace Naptár
 
         static void UjEsemenyRogzitese()
         {
-            Console.WriteLine("\n--- ÚJ ESEMÉNY ---");
+            Console.WriteLine("\n--- Új Esemény ---");
             Esemeny uj = new Esemeny();
 
             Console.Write("Kié az esemény (Apa/Anya)? ");
@@ -245,7 +245,7 @@ namespace Naptár
 
         static void FajlbaMentes()
         {
-            Console.WriteLine("\nMentés folyamatban...");
+            Console.WriteLine("\n");
             StreamWriter iro = new StreamWriter(fajlNev);
 
 
@@ -257,13 +257,7 @@ namespace Naptár
                 }
             }
             iro.Close();
-        
-        
-
-
-
-
-    
+  
         }
     }
 }
