@@ -104,6 +104,25 @@ namespace Naptár
 
                 Console.Write("Kié az esemény (Apa/Anya)? ");
                 uj.Tulajdonos = Console.ReadLine();
+
+                int nap = 0;
+                bool sikeresNap = false;
+                do
+                {
+                    Console.Write("Nap (1-29): ");
+                    string bemenet = Console.ReadLine();
+                    bool sikerult = int.TryParse(bemenet, out nap);
+
+                    if (sikerult && nap >= 1 && nap <= 29)
+                    {
+                        sikeresNap = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Hiba! Vagy nem számot írtál, vagy nincs 1 és 29 között.");
+                    }
+                } while (!sikeresNap);
+
             }
 
 
