@@ -57,7 +57,30 @@ namespace Naptár
                 } while (menupont != "4");
             }
 
+            // függvények
 
+            static void KezdetiFeltoltes()
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    Esemeny uj = new Esemeny();
+                    uj.Tulajdonos = "Apa";
+                    uj.Idopont = new DateTime(2028, 2, veletlen.Next(1, 30), veletlen.Next(8, 20), veletlen.Next(0, 60), 0);
+                    uj.Idotartam = veletlen.Next(30, 121);
+                    uj.MenteniKell = false;
+                    esemenyLista.Add(uj);
+                }
+
+                for (int i = 0; i < 10; i++)
+                {
+                    Esemeny uj = new Esemeny();
+                    uj.Tulajdonos = "Anya";
+                    uj.Idopont = new DateTime(2028, 2, veletlen.Next(1, 30), veletlen.Next(8, 20), veletlen.Next(0, 60), 0);
+                    uj.Idotartam = veletlen.Next(30, 121);
+                    uj.MenteniKell = false;
+                    esemenyLista.Add(uj);
+                }
+            }
 
 
 
