@@ -246,6 +246,21 @@ namespace Naptár
                 }
             }
 
+            static void FajlbaMentes()
+            {
+                Console.WriteLine("\nMentés folyamatban...");
+                StreamWriter iro = new StreamWriter(fajlNev);
+
+
+                foreach (Esemeny e in esemenyLista)
+                {
+                    if (e.MenteniKell == true)
+                    {
+                        iro.WriteLine(e.Tulajdonos + ";" + e.Idopont + ";" + e.Idotartam);
+                    }
+                }
+                iro.Close();
+            }
 
 
 
