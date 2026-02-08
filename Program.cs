@@ -82,6 +82,24 @@ namespace Naptár
                 }
             }
 
+            static void NaptarMegjelenites()
+            {
+                Console.WriteLine("\n--- ESEMÉNYEK LISTÁJA ---");
+                Console.WriteLine("(Jelmagyarázat: [M] = Mentett/Saját, [G] = Generált/Ideiglenes)\n");
+
+                foreach (Esemeny e in esemenyLista)
+                {
+                    string jelolo = e.MenteniKell ? "[M]" : "[G]";
+                    Console.WriteLine("{0} {1} - {2}: {3} perc",
+                        jelolo, e.Idopont.ToString("yyyy.MM.dd HH:mm"), e.Tulajdonos, e.Idotartam);
+                }
+                Console.WriteLine("\nNyomj egy gombot...");
+                Console.ReadKey();
+            }
+
+
+
+
 
 
         }
