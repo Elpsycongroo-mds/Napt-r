@@ -1,15 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-
 namespace Naptár
 {
-    //STRUCT 
-    class Esemeny
+    struct Esemeny
     {
         public string Tulajdonos;
         public DateTime Idopont;
@@ -33,7 +31,7 @@ namespace Naptár
             do
             {
                 Console.Clear();
-                Console.WriteLine("--- CSaládi Naptár: 2028 Február ---");
+                Console.WriteLine("--- Családi Naptár: 2028 Február ---");
                 Console.WriteLine("1. Naptár megjelenítése");
                 Console.WriteLine("2. Új esemény rögzítése");
                 Console.WriteLine("3. Legközelebbi esemény keresése");
@@ -54,8 +52,7 @@ namespace Naptár
             } while (menupont != "4");
         }
 
-        // függvények
-        //TRYPARSE ---> CONVERT
+        //Függvények
 
         static void KezdetiFeltoltes()
         {
@@ -69,6 +66,7 @@ namespace Naptár
                 esemenyLista.Add(uj);
             }
 
+            
             for (int i = 0; i < 10; i++)
             {
                 Esemeny uj = new Esemeny();
@@ -108,16 +106,16 @@ namespace Naptár
             do
             {
                 Console.Write("Nap (1-29): ");
-                string bemenet = Console.ReadLine();
-                bool sikerult = int.TryParse(bemenet, out nap);
+                
+                nap = Convert.ToInt32(Console.ReadLine());
 
-                if (sikerult && nap >= 1 && nap <= 29)
+                if (nap >= 1 && nap <= 29)
                 {
                     sikeresNap = true;
                 }
                 else
                 {
-                    Console.WriteLine("Hiba! Vagy nem számot írtál, vagy nincs 1 és 29 között.");
+                    Console.WriteLine("Hiba! Nincs 1 és 29 között.");
                 }
             } while (!sikeresNap);
 
@@ -126,10 +124,9 @@ namespace Naptár
             do
             {
                 Console.Write("Óra (8-20): ");
-                string bemenet = Console.ReadLine();
-                bool sikerult = int.TryParse(bemenet, out ora);
+                ora = Convert.ToInt32(Console.ReadLine());
 
-                if (sikerult && ora >= 8 && ora <= 20)
+                if (ora >= 8 && ora <= 20)
                 {
                     sikeresOra = true;
                 }
@@ -144,10 +141,9 @@ namespace Naptár
             do
             {
                 Console.Write("Perc (0-59): ");
-                string bemenet = Console.ReadLine();
-                bool sikerult = int.TryParse(bemenet, out perc);
+                perc = Convert.ToInt32(Console.ReadLine());
 
-                if (sikerult && perc >= 0 && perc < 60)
+                if (perc >= 0 && perc < 60)
                 {
                     sikeresPerc = true;
                 }
@@ -159,16 +155,14 @@ namespace Naptár
 
             uj.Idopont = new DateTime(2028, 2, nap, ora, perc, 0);
 
-            // időtartama
             int idotartam = 0;
             bool sikeresIdo = false;
             do
             {
                 Console.Write("Időtartam (perc): ");
-                string bemenet = Console.ReadLine();
-                bool sikerult = int.TryParse(bemenet, out idotartam);
+                idotartam = Convert.ToInt32(Console.ReadLine());
 
-                if (sikerult && idotartam > 0)
+                if (idotartam > 0)
                 {
                     sikeresIdo = true;
                 }
@@ -182,7 +176,7 @@ namespace Naptár
             uj.MenteniKell = true;
 
             esemenyLista.Add(uj);
-            Console.WriteLine("Rögzítve! ez az esemény kilépéskor el lesz mentve.");
+            Console.WriteLine("Rögzítve! Kilépéskor mentésre kerül.");
             Console.ReadKey();
         }
 
@@ -194,22 +188,23 @@ namespace Naptár
 
             Console.WriteLine("\nGenerált viszonyítási időpont: " + most.ToString());
 
-            Esemeny legkozelebbi = null;
+            
+            Esemeny legkozelebbi = new Esemeny();
+            bool talalat = false;
 
             foreach (Esemeny e in esemenyLista)
             {
-                // Ha az esemény a jövőben van
                 if (e.Idopont > most)
                 {
-                    // Ha még nincs találatunk VAGY ez az esemény korábbi
-                    if (legkozelebbi == null || e.Idopont < legkozelebbi.Idopont)
+                    if (!talalat || e.Idopont < legkozelebbi.Idopont)
                     {
                         legkozelebbi = e;
+                        talalat = true; 
                     }
                 }
             }
 
-            if (legkozelebbi != null)
+            if (talalat)
             {
                 Console.WriteLine("A legközelebbi esemény: {0} - {1}",
                     legkozelebbi.Tulajdonos, legkozelebbi.Idopont);
@@ -234,13 +229,14 @@ namespace Naptár
                         Esemeny betoltott = new Esemeny();
                         betoltott.Tulajdonos = adatok[0];
                         betoltott.Idopont = DateTime.Parse(adatok[1]);
-                        betoltott.Idotartam = Convert.ToInt32(adatok[2]);
+                        betoltott.Idotartam = Convert.ToInt32(adatok[2]); 
                         betoltott.MenteniKell = true;
                         esemenyLista.Add(betoltott);
                     }
                     catch
                     {
-                        //HIBAÜZENET
+                        
+                        Console.WriteLine($"Hiba a sorok feldolgozásakor");
                     }
                 }
             }
@@ -251,7 +247,6 @@ namespace Naptár
             Console.WriteLine("\n");
             StreamWriter iro = new StreamWriter(fajlNev);
 
-
             foreach (Esemeny e in esemenyLista)
             {
                 if (e.MenteniKell == true)
@@ -260,7 +255,6 @@ namespace Naptár
                 }
             }
             iro.Close();
-  
         }
     }
 }
