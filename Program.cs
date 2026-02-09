@@ -8,6 +8,7 @@ using System.IO;
 
 namespace Naptár
 {
+    //STRUCT 
     class Esemeny
     {
         public string Tulajdonos;
@@ -16,7 +17,7 @@ namespace Naptár
         public bool MenteniKell;
     }
 
-    class Program
+    internal class Program
     {
         static List<Esemeny> esemenyLista = new List<Esemeny>();
         static Random veletlen = new Random();
@@ -54,6 +55,7 @@ namespace Naptár
         }
 
         // függvények
+        //TRYPARSE ---> CONVERT
 
         static void KezdetiFeltoltes()
         {
@@ -238,6 +240,7 @@ namespace Naptár
                     }
                     catch
                     {
+                        //HIBAÜZENET
                     }
                 }
             }
